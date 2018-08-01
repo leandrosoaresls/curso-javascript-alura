@@ -4,7 +4,7 @@ for(i = 0; i < pacientes.length; i++) {
     let paciente  = pacientes[i];
     const peso = paciente.querySelector(".info-peso").textContent;
     const altura = paciente.querySelector(".info-altura").textContent;
-    const imc = peso / (altura * altura);
+    
     let tdImc = paciente.querySelector(".info-imc");
 
     pesoEhInvalido = true;
@@ -19,25 +19,17 @@ for(i = 0; i < pacientes.length; i++) {
         tdImc.textContent = "A altura é inválida";
         paciente.classList.add("paciente-invalido");
     } else {
-        tdImc.textContent = imc.toFixed(2);
+        tdImc.textContent = calculaImc(peso, altura);
     }
 }
 
-var inputFrase = document.querySelector('.frase');
-var botao = document.querySelector('.botao');
-var copia = document.querySelector('.copia');
+function calculaImc (peso, altura) {
+    let imc = 0;
 
-function botaoHandler() {
+    imc = peso / (altura * altura);
 
-    copia.textContent = inputFrase.value;
-    inputFrase.value = "";
+    return imc.toFixed(2);
 }
 
-//botao.addEventListener('click', botaoHandler);
 
-botao.addEventListener("click", function(event){
-    //event.preventDefault();
 
-    console.log(event);
-    //Código para adicionar na lista de tarefas
-});
