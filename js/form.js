@@ -7,27 +7,28 @@ botaoAdicionar.addEventListener("click", function(event){
 
     const paciente = obtemPacienteDoFormulario(form);
 
-    const pacienteTr = criaTr(paciente);  
+    adicionaPacienteNaTabela(paciente);
 
     const erros = validaPaciente(paciente);
-    console.log(erros);
     
     if(erros.length > 0) {
         exibeMensagemDeErro(erros);
         return;
     }
     
-
-    const tabela = document.querySelector("#tabela-pacientes");
-
-    tabela.appendChild(pacienteTr);
-
     const ul = document.querySelector(".mensagens-erro");
 
-    ul.innerHTML = "";
+    ul.innerHTML = ""; //limpa lista de erros
 
-    form.reset();
+    form.reset(); //limpa formulario
 });
+
+function adicionaPacienteNaTabela (paciente) {
+
+    const pacienteTr = criaTr(paciente);
+    const tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+}
 
 function obtemPacienteDoFormulario (form) {
     const paciente = {
@@ -43,12 +44,14 @@ function obtemPacienteDoFormulario (form) {
 
 function criaTr (paciente) {
     const tr = document.createElement("tr");
+    tr.classList.add("paciente");
 
     tr.appendChild(criaTd(paciente.nome, "info-nome"));
     tr.appendChild(criaTd(paciente.peso, "info-peso"));
     tr.appendChild(criaTd(paciente.altura, "info-altura"));
     tr.appendChild(criaTd(paciente.gordura, "info-gordura"));
     tr.appendChild(criaTd(paciente.imc, "info-imc"));
+    
 
     return tr;
 };
@@ -64,7 +67,7 @@ function criaTd (dado, classe) {
 function validaPaciente (paciente) {
     let erros = [];
 
-    console.log(paciente.nome.length);
+    //console.log(paciente.nome.length);
 
     if(paciente.nome.length == 0) { 
 
